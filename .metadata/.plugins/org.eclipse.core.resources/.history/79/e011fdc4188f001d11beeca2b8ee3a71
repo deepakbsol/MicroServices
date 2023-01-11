@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: gateway
+  cloud:    gateway:      routes:        - id: StudentServer
+          uri: lb://StudentServer
+          predicates:           - path= /api/student
+           
+           
+        - id: EmployeeServer
+          uri: lb://EmployeeServer
+          predicates:
+           - path= /api/employee
+        
+    
+eureka:  instance:    prefer-ip-address: true
+  client:    fetchRegistry: true
+    registerWithEureka: true
+    service-url:      defaultzone: http://localhost:8761/eureka
+      
+server:
+  port: 9000
+  
